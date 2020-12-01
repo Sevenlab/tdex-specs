@@ -1,0 +1,438 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>BOTD #4: Trade Protocol · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="CONTRIBUTING.html" />
+    
+    
+    <link rel="prev" href="03-swap-protocol.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="00-index.html">
+            
+                <a href="00-index.html">
+            
+                    
+                    BOTD #0: Index
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="01-message-protocol.html">
+            
+                <a href="01-message-protocol.html">
+            
+                    
+                    BOTD #1: Message Protocol
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="02-transport-protocol.html">
+            
+                <a href="02-transport-protocol.html">
+            
+                    
+                    BOTD #2: Transport Protocol
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="03-swap-protocol.html">
+            
+                <a href="03-swap-protocol.html">
+            
+                    
+                    BOTD #3: Swap Protocol
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="04-trade-protocol.html">
+            
+                <a href="04-trade-protocol.html">
+            
+                    
+                    BOTD #4: Trade Protocol
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Contribute</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="CONTRIBUTING.html">
+            
+                <a href="CONTRIBUTING.html">
+            
+                    
+                    Contribution Guidelines
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >BOTD #4: Trade Protocol</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="botd-4-trade-protocol">BOTD #4: Trade protocol</h1>
+<p>The Trade protocol defines the public interface of a non-custodial exchange on top of an Elements-based chain such as <a href="https://liquid.net" target="_blank">Liquid Network</a>. </p>
+<h2 id="overview">Overview</h2>
+<p>The centralized exchange main business is providing a venue for <em>traders</em> and <em>market makers</em> to register their offers to buy and sell in an order-book. In order to execute the orders, both are required to deposit funds and trust the exchange as custodian.  </p>
+<p><strong>TDEX</strong> aims to create an open network that connects <em>traders</em> and <em>market makers</em> directly to each other, without the need of a centralized custodian, exploiting the atomic swap capability of Elements-based chains for executing trades in a trustless fashion.</p>
+<p>The <strong>market makers</strong> provide always-on endpoints and put liquidity in various asset pairs forming a specified interface called <strong>Market</strong>.  Each <em>Market</em> holds reserves of a <strong>base asset</strong> and a <strong>quote asset</strong>.</p>
+<p>Anyone can become a <strong>liquidity provider</strong> and contribute with reserves in a non-custodial manner running an always-on endpoint to process trading requests. This is different than buying or selling; it requires depositing an equivalent value of both base and quote assets and select an automated market making strategy. </p>
+<p>A <strong>trader</strong> connects to the provider using the <a href="02-transport-protocol.html">secure transport defined in the BOTD #2</a>, fetches the current <em>market price</em> defined by the provider&apos;s strategy and makes an atomic swap using the <a href="03-swap-protocol.html">swap protocol defined in the BOTD #3</a>. Limit orders could be supported as well, delaying the time of execution of the swap proposal in the future.</p>
+<h2 id="trade">Trade</h2>
+<ol>
+<li>The <strong>Provider</strong> deposits two reserves for each asset forming a <em>Market</em>, defined as a pair of BASE ASSET and QUOTE ASSET, and expose a public reachable endpoint.</li>
+<li>The <strong>Trader</strong> fetches from the <strong>Provider</strong> the list of supported pairs and linked provider&apos;s fees.</li>
+<li>The <strong>Trader</strong> passing a supported market in the request recognized by the hashes of two assets, fetches the current <strong>market rate</strong></li>
+<li>The <strong>Trader</strong> proposes a new <strong>swap request</strong> using the price given and awaits for Provider&apos;s response.</li>
+<li>If the <strong>Provider</strong> accepts the terms will send back a <strong>swap accept</strong> message containing the partially signed transaction.</li>
+<li>The <strong>Trader</strong> sends the signed transaction to finalize the trade using the <strong>swap complete</strong> message.</li>
+<li>The <strong>Provider</strong> will finalize and broadcast the transaction to the network for on-chain settlement.</li>
+</ol>
+<blockquote>
+<p>NOTICE: The Trader could skip point 6-7 and right away broadcast the transaction himself. Even if valid would be better for clients software to let the Provider be aware of the finalized transaction id rather than watch the blockchain to scan for known swaps.</p>
+</blockquote>
+<h3 id="data-structures">Data Structures</h3>
+<ul>
+<li>Service Interface</li>
+</ul>
+<pre><code class="lang-protobuf"><span class="hljs-class"><span class="hljs-keyword">service</span> <span class="hljs-title">Trade</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">rpc</span> Markets(MarketsRequest) <span class="hljs-keyword">returns</span> (MarketsReply)</span>;
+  <span class="hljs-function"><span class="hljs-keyword">rpc</span> Balances(BalancesRequest) <span class="hljs-keyword">returns</span> (BalancesReply)</span>;
+  <span class="hljs-function"><span class="hljs-keyword">rpc</span> MarketPrice(MarketPriceRequest) <span class="hljs-keyword">returns</span> (MarketPriceReply)</span>;
+  <span class="hljs-function"><span class="hljs-keyword">rpc</span> TradePropose(TradeProposeRequest) <span class="hljs-keyword">returns</span> (stream TradeProposeReply)</span>;
+  <span class="hljs-function"><span class="hljs-keyword">rpc</span> TradeComplete(TradeCompleteRequest) <span class="hljs-keyword">returns</span> (stream TradeCompleteReply)</span>;
+}
+</code></pre>
+<ul>
+<li>Messages </li>
+</ul>
+<pre><code class="lang-protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">MarketsRequest</span> </span>{}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">MarketsReply</span> </span>{ <span class="hljs-keyword">repeated</span> MarketWithFee markets = <span class="hljs-number">1</span>; }
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">BalancesRequest</span> </span>{ Market market = <span class="hljs-number">1</span>; }
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">BalancesReply</span> </span>{ <span class="hljs-keyword">repeated</span> BalanceWithFee balances = <span class="hljs-number">1</span>; }
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">MarketPriceRequest</span> </span>{
+  Market market = <span class="hljs-number">1</span>;
+  TradeType type = <span class="hljs-number">2</span>;
+  <span class="hljs-built_in">uint64</span> amount = <span class="hljs-number">3</span>;
+  <span class="hljs-built_in">string</span> asset = <span class="hljs-number">4</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">MarketPriceReply</span> </span>{ <span class="hljs-keyword">repeated</span> PriceWithFee prices = <span class="hljs-number">1</span>; }
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">TradeProposeRequest</span> </span>{
+  Market market = <span class="hljs-number">1</span>;
+  TradeType type = <span class="hljs-number">2</span>;
+  SwapRequest swap_request = <span class="hljs-number">3</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">TradeProposeReply</span> </span>{
+  SwapAccept swap_accept = <span class="hljs-number">1</span>;
+  SwapFail swap_fail = <span class="hljs-number">2</span>;
+  <span class="hljs-built_in">uint64</span> expiry_time_unix = <span class="hljs-number">3</span>;
+}
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">TradeCompleteRequest</span> </span>{
+  SwapComplete swap_complete = <span class="hljs-number">1</span>;
+  SwapFail swap_fail = <span class="hljs-number">2</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">TradeCompleteReply</span> </span>{
+  <span class="hljs-built_in">string</span> txid = <span class="hljs-number">1</span>;
+  SwapFail swap_fail = <span class="hljs-number">2</span>;
+}
+</code></pre>
+<ul>
+<li>Custom Types </li>
+</ul>
+<pre><code class="lang-protobuf"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">TradeType</span> </span>{
+  BUY = <span class="hljs-number">0</span>;
+  SELL = <span class="hljs-number">1</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">Fee</span> </span>{
+  <span class="hljs-built_in">string</span> asset = <span class="hljs-number">1</span>;
+  <span class="hljs-built_in">int64</span> basis_point = <span class="hljs-number">2</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">Balance</span> </span>{
+  <span class="hljs-built_in">int64</span> base_amount = <span class="hljs-number">1</span>;
+  <span class="hljs-built_in">int64</span> quote_amount = <span class="hljs-number">2</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">BalanceWithFee</span> </span>{
+  Balance balance = <span class="hljs-number">1</span>;
+  Fee fee = <span class="hljs-number">2</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">Market</span> </span>{
+  <span class="hljs-built_in">string</span> base_asset = <span class="hljs-number">1</span>;
+  <span class="hljs-built_in">string</span> quote_asset = <span class="hljs-number">2</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">MarketWithFee</span> </span>{
+  Market market = <span class="hljs-number">1</span>;
+  Fee fee = <span class="hljs-number">2</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">Price</span> </span>{
+  <span class="hljs-built_in">float</span> base_price = <span class="hljs-number">1</span>;
+  <span class="hljs-built_in">float</span> quote_price = <span class="hljs-number">2</span>;
+}
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">PriceWithFee</span> </span>{
+  Price price = <span class="hljs-number">1</span>;
+  Fee fee = <span class="hljs-number">2</span>;
+  <span class="hljs-built_in">uint64</span> amount = <span class="hljs-number">3</span>;
+  <span class="hljs-built_in">string</span> asset = <span class="hljs-number">4</span>;
+}
+</code></pre>
+<h2 id="glossary">Glossary</h2>
+<ul>
+<li><p><strong>Liquidity Provider</strong>: Holds reserves of pegged Bitcoin (eg. L-BTC) and an associated Elements asset in his non-custodial wallet, running automated market-making strategies both with or without an oracle. Providers are incentivized to be always on and need to expose a public reachable endpoint either via clearnet or using a <a href="https://2019.www.torproject.org/docs/tor-onion-service.html" target="_blank">Onion hidden service</a></p>
+</li>
+<li><p><strong>Market</strong>: A single provider putting liquidity into an asset pair forms a market defines as <strong>BASE_ASSET-QUOTE_ASSET</strong>. Multiple markets can co-exist, although this is less beneficial for signaling offers to traders. </p>
+</li>
+<li><p><strong>Trader</strong>: Proposes new swaps using the provider&apos;s market rate. A trader can come and go, he only needs to support the <a href="03-swap-protocol.html">swap protocol defined in the BOTD #3</a> and he can swap between the two assets in the <strong>Market</strong> in either direction by adding to the liquidity reserve of one and withdrawing from the reserve of the other. Traders can either connect directly to a <strong>provider</strong> if they already know the endpoint.</p>
+</li>
+<li><p><strong>Pool</strong>: Providers can register into a distributed service mesh with other providers pooling together liquidity. This acts as a first responder for traders to lookup for provider&apos;s aggregated offers. A provider could run alone OR in a pool, but not both at the same time with the same reserves.</p>
+</li>
+<li><p><strong>Liquidity fee</strong>: A small liquidity provider fee can be taken out of each trade and added to the reserves, besides the chain fee. While the <em>BASE_ASSET-QUOTE_ASSET</em> reserve ratio is constantly shifting, fees make sure that the total combined reserve size increases with every trade.
+Guaranteed arbitrage opportunities from price fluctuations should push a steady flow of transactions through the system and increase the amount of fee revenue generated.</p>
+</li>
+<li><p><strong>Automated Market Making</strong>: A liquidity provider has full control over the market making strategy to apply needed to calculate the <strong>market rate</strong> at which to accept trades. That being said, there is a possibility to apply an automated market-making relying only on the reserves balances and the amount requested by the trader, without the need to connect to an external price feed. One of the most famous algorithms is called <em>constant product market-making</em>. In short, this model generates a full order-book based on an initial price for the market. Every transaction that occurs on this market will adjust the prices of the market accordingly. It&apos;s a basic supply and demand automated market making system. </p>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="03-swap-protocol.html" class="navigation navigation-prev " aria-label="Previous page: BOTD #3: Swap Protocol">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="CONTRIBUTING.html" class="navigation navigation-next " aria-label="Next page: Contribution Guidelines">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"BOTD #4: Trade Protocol","level":"1.6","depth":1,"next":{"title":"Contribution Guidelines","level":"2.1","depth":1,"path":"CONTRIBUTING.md","ref":"CONTRIBUTING.md","articles":[]},"previous":{"title":"BOTD #3: Swap Protocol","level":"1.5","depth":1,"path":"03-swap-protocol.md","ref":"03-swap-protocol.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["insert-logo"],"pluginsConfig":{"insert-logo":{"url":"./tdex-logo.png","style":"background: none; height:64px"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"./styles/website.css"}},"file":{"path":"04-trade-protocol.md","mtime":"2020-12-01T22:10:53.636Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-12-01T22:10:57.908Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
